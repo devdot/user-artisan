@@ -63,7 +63,7 @@ class DeleteUser extends Command
         // make sure this is dev environment
         if(app()->environment('production')) {
             // check if we have the force flag
-            if($this->hasArgument('force')) {
+            if($this->hasOption('force')) {
                 $this->line('Forcing delete in production.');
             }
             else {
