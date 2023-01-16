@@ -16,10 +16,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/console": "^9.47",
-        "illuminate/support": "^9.47"
-    },
-    "require-dev": {
+        "illuminate/contracts": "^9",
+        "illuminate/console": "^9"
     },
     "extra": {
         "laravel": {
