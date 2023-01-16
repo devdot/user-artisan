@@ -42,7 +42,12 @@ class DeleteUser extends Command
         $user = null;
         if(is_numeric($this->argument('user'))) {
             // load the user from id
-            $user = User::findOrFail($this->argument('user'));
+            $user = User::find($this->argument('user'));
+            // check if its null
+            if(!$user) {
+                $this->error('Could not find user with ID '.$this->argument('user'));
+                return Command::FAILURE;
+            }
         }
         else {
             // load the user from email
