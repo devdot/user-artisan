@@ -42,6 +42,12 @@ class CreateUser extends Command
             return Command::FAILURE;
         }
 
+        // check for the email to be unique
+        if(User::where('email', $this->argument('email'))) {
+            $this->error('Cannot create user with this email!');
+            return Command::FAILURE;
+        }
+
         // insert data from input
         $user = new User();
         $user->name = $this->argument('name');
