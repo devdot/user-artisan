@@ -59,20 +59,25 @@ class CreateUser extends Command
         // write the password and save the user
         $user->password = Hash::make($passwordClearText);
         $user->save();
+        $this->info('User created successfully!');
 
         // output the data
-        $this->table([
+        $tableHeader = [
             'ID',
             'Name',
             'Email',
-            $hasPasswordInput ? 'Password' : null,
-        ], [
+        ];
+        $tableData = [
             $user->id,
             $user->name,
             $user->email,
-            $hasPasswordInput ? $passwordClearText : null,
-        ]);
-
+        ];
+        if(!$hasPasswordInput) {
+            $tableHeader[] = 'Password';
+            $tableData[] = $passwordClearText;
+        }
+        $this->table($tableHeader, $tableData);
+        
         return Command::SUCCESS;
     }
 }
