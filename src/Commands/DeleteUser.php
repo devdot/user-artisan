@@ -59,6 +59,22 @@ class DeleteUser extends Command
             }
         }
 
+        
+        // make sure this is dev environment
+        if(app()->environment('production')) {
+            // check if we have the force flag
+            if($this->hasArgument('force')) {
+                $this->line('Forcing delete in production.');
+            }
+            else {
+                $this->warn('You are in production! Use --force to force delete without promt.');
+                if($this->confirm('Do you want to proceed deleting #'.$user->id.' '.$user->email.' ?') == false) {
+                    // they did not confirm, abort
+                    return Command::FAILURE;
+                }
+            }
+        }
+
         // now remove the user
         $user->delete();
         $this->info('The user #'.$user->id.' '.$user->email.' was deleted successfully!');
