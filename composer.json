@@ -1,6 +1,12 @@
 {
     "name": "devdot/user-artisan",
     "description": "Manage users in laravel using the artisan CLI",
+    "keywords": [
+        "user artisan",
+        "user management",
+        "devdot",
+        "laravel"
+    ],
     "type": "library",
     "license": "MIT",
     "autoload": {
