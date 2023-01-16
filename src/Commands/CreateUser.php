@@ -76,7 +76,7 @@ class CreateUser extends Command
             $tableHeader[] = 'Password';
             $tableData[] = $passwordClearText;
         }
-        $this->table($tableHeader, $tableData);
+        $this->table($tableHeader, [$tableData]);
         
         return Command::SUCCESS;
     }
