@@ -43,7 +43,7 @@ class CreateUser extends Command
         }
 
         // see if we should do this interactively
-        $interactive = $this->argument('user') == null;
+        $interactive = $this->argument('name') == null;
         $user = new User();
 
         // insert data from input
