@@ -4,6 +4,7 @@ namespace Devdot\UserArtisan\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Schema;
 
 class ListUsers extends Command
 {
@@ -29,11 +30,23 @@ class ListUsers extends Command
     public function handle()
     {
         // get all users from DB using the App's models
-        $users = User::all([
-            'id',
-            'name',
-            'email',
-            ])->toArray();
+        try {
+            $users = User::all([
+                'id',
+                'name',
+                'email',
+                ])->toArray();
+        }
+        catch(\Illuminate\Database\QueryException $e) {
+            // check if the table exists
+            if(Schema::hasTable('users') == false) {
+                $this->error('Missing user table! Run php artisan migrate to create default user table.');
+                return Command::FAILURE;
+            }
+
+            // it's not the expected source of error, throw again
+            throw $e;
+        }
 
         // send a warning if we don't even have users
         if(count($users) == 0) {
