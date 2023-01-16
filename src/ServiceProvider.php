@@ -31,6 +31,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
             $this->commands([
                 Commands\ListUsers::class,
                 Commands\DeleteUser::class,
+                Commands\CreateUser::class,
             ]);
         }
     }
