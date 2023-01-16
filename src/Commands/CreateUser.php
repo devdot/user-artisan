@@ -46,7 +46,7 @@ class CreateUser extends Command
         $user->email = $this->argument('email');
         
         // check for password
-        $hasPasswordInput = $this->hasArgument('password');
+        $hasPasswordInput = empty($this->argument('password'));
         $passwordClearText = '';
         if($hasPasswordInput) {
             $passwordClearText = $this->argument('password');
