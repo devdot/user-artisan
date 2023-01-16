@@ -25,5 +25,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         AboutCommand::add('devdot/artisan-user', fn () => [
             'available' => true,
         ]);
+
+        // install all our commands
+        if($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\ListUsers::class,
+            ]);
+        }
     }
 }
