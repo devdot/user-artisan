@@ -18,6 +18,8 @@ class CreateUser extends Command
         {name : The name of the new user}
         {email : The email for the new user}
         {password? : The password to be set for the new user}
+        {--hide-password : Always hide the password in output}
+        {--show-password : Always show the password in output}
         ';
 
     /**
@@ -46,7 +48,7 @@ class CreateUser extends Command
         $user->email = $this->argument('email');
         
         // check for password
-        $hasPasswordInput = $this->argument('password') == null;
+        $hasPasswordInput = $this->argument('password') != null;
         $passwordClearText = '';
         if($hasPasswordInput) {
             $passwordClearText = $this->argument('password');
@@ -72,7 +74,7 @@ class CreateUser extends Command
             $user->name,
             $user->email,
         ];
-        if(!$hasPasswordInput) {
+        if($this->option('hide-password') == false && ($hasPasswordInput == false || $this->option('show-password'))) {
             $tableHeader[] = 'Password';
             $tableData[] = $passwordClearText;
         }
