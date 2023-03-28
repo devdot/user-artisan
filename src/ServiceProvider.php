@@ -22,17 +22,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
      */
     public function boot()
     {
-        AboutCommand::add('devdot/artisan-user', fn () => [
+        AboutCommand::add('devdot/user-artisan', fn () => [
             'available' => true,
         ]);
 
         // install all our commands
-        if($this->app->runningInConsole()) {
-            $this->commands([
-                Commands\ListUsers::class,
-                Commands\DeleteUser::class,
-                Commands\CreateUser::class,
-            ]);
-        }
+        $this->commands([
+            Commands\ListUsers::class,
+            Commands\DeleteUser::class,
+            Commands\CreateUser::class,
+        ]);
     }
 }
